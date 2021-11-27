@@ -2,11 +2,14 @@
 var http = require("http");
 const fs = require("fs");
 
+//create file
 fs.writeFile("file.txt", "Logs:", function (err, data) {
   if (err) throw err;
 
   console.log("File created!");
 });
+
+//create server
 http
   .createServer(function (request, response) {
     switch (request.url) {
@@ -23,6 +26,8 @@ http
         response.write("404 error! This page doesn't exist.");
         break;
     }
+
+    //update file
     fs.appendFile("file.txt", `${request.url} \n`, function (err, data) {
       if (err) throw err;
       console.log("Log saved!");
